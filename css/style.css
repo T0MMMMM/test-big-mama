@@ -1,0 +1,355 @@
+/* ==========================================================================
+   1. IMPORTATION DES POLICES
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');
+
+@font-face {
+    font-family: 'Maison Neue';
+    src: url('../assets/fonts/MaisonNeue-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Maison Neue';
+    src: url('../assets/fonts/MaisonNeue-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* ==========================================================================
+   2. CONFIGURATION & VARIABLES
+   ========================================================================== */
+:root {
+    /* --- Couleurs --- */
+    --color-bg-primary: #F2E8D4;
+    --color-text-primary: #212850;
+    --color-accent: #4197C8;
+    --color-white: #FFFFFF;
+
+    /* --- Polices --- */
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Maison Neue', sans-serif;
+    --font-interface: 'Outfit', sans-serif;
+
+    /* --- Dimensions (référence : 1600 / 850) --- */
+    --card-width: clamp(40px, 8.4375vw, 135px);
+    --card-height: clamp(64px, 13.4375vw, 215px);
+    --grid-height: clamp(64px, 13.4375vw, 215px);
+    --radius-card: clamp(8px, 1vw, 16px);
+
+    /* --- Animations --- */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==========================================================================
+   3. STYLES GLOBAUX
+   ========================================================================== */
+body {
+    /* Boîte */
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+
+    /* Typographie */
+    text-align: center;
+    color: var(--color-text-primary);
+
+    /* Visuel */
+    background-color: var(--color-bg-primary);
+}
+
+/* ==========================================================================
+   4. SECTION PROJETS
+   ========================================================================== */
+.project-section {
+    /* Positionnement */
+    position: relative;
+
+    /* Boîte */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    width: 100%;
+    height: 100%;
+    padding: 16px 12px;
+    box-sizing: border-box;
+}
+
+.project-section__title {
+    /* Boîte */
+    max-width: 44%;
+    margin: 0;
+
+    /* Typographie */
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.4rem, 3vw, 3rem);
+    line-height: 114%;
+}
+
+.project-section__highlight {
+    /* Positionnement */
+    position: relative;
+    z-index: 2;
+
+    /* Boîte */
+    display: inline-block;
+}
+
+.project-section__icon-focus {
+    /* Positionnement */
+    position: absolute;
+    left: -0.625em;
+    top: -0.1875em;
+
+    /* Boîte */
+    width: 145%;
+    height: auto;
+
+    /* Divers */
+    pointer-events: none;
+}
+
+.project-section__icon-bulb {
+    /* Positionnement */
+    position: absolute;
+    right: clamp(0%, calc(25.7vw - 123px), 18%);
+    top: clamp(0px, calc(450px - 35vw), 100px);
+    z-index: -1;
+
+    /* Boîte */
+    width: clamp(60px, 15vw, 400px);
+    height: auto;
+
+    /* Divers */
+    pointer-events: none;
+}
+
+.project-section__grid {
+    /* Boîte */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: var(--grid-height);
+    padding: 0 clamp(16px, 3vw, 48px);
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   5. PIED DE PAGE INFO PROJET
+   ========================================================================== */
+.project-info {
+    /* Boîte */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    max-width: 23.5%;
+    height: clamp(40px, 5vw, 80px);
+}
+
+.project-info__text {
+    /* Boîte */
+    margin: 0;
+
+    /* Typographie */
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(12px, 1.5vw, 24px);
+
+    /* Divers */
+    transition: opacity var(--transition-fast);
+}
+
+.project-info__text span {
+    font-weight: 700;
+}
+
+.project-info__underline {
+    /* Boîte */
+    width: 100%;
+
+    /* Visuel */
+    clip-path: inset(0 0% 0 0%);
+
+    /* Divers */
+    transition: clip-path var(--transition-fast);
+}
+
+/* ==========================================================================
+   6. COMPOSANT CARTE PROJET
+   ========================================================================== */
+.project-card {
+    /* Positionnement */
+    position: relative;
+    z-index: 1;
+
+    /* Boîte */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 1;
+    min-width: 0;
+    margin-left: clamp(-34px, -2.125vw, -5px);
+
+    /* Divers */
+    cursor: pointer;
+    transform: rotateX(26deg) rotateY(26deg);
+    transition: transform var(--transition-medium), z-index 0s;
+}
+
+.project-card:hover .project-card__wrapper {
+    transform: translateY(clamp(-50px, -3.125vw, -25px));
+    transition: transform var(--transition-bounce);
+}
+
+.project-card:hover .project-card__cta {
+    opacity: 1;
+}
+
+.project-card__wrapper {
+    /* Positionnement */
+    position: relative;
+
+    /* Visuel */
+    border-radius: var(--radius-card);
+
+    /* Divers */
+    transition: transform var(--transition-bounce);
+}
+
+.project-card__image {
+    /* Boîte */
+    display: block;
+    width: var(--card-width);
+    height: var(--card-height);
+
+    /* Visuel */
+    object-fit: cover;
+    border-radius: var(--radius-card);
+}
+
+.project-card__cta {
+    /* Positionnement */
+    position: absolute;
+    top: 0;
+    z-index: 1;
+
+    /* Boîte */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: clamp(14px, 1.5vw, 24px);
+    padding: clamp(1px, 0.125vw, 2px) 0;
+
+    /* Typographie */
+    font-family: var(--font-interface);
+    font-weight: 500;
+    font-size: clamp(8px, 1vw, 16px);
+    line-height: 1.2;
+    text-align: center;
+    color: var(--color-white);
+
+    /* Visuel */
+    background-color: var(--color-accent);
+    border-top-left-radius: var(--radius-card);
+    border-top-right-radius: var(--radius-card);
+    opacity: 0;
+
+    /* Divers */
+    transition: all var(--transition-medium);
+}
+
+.project-card__border {
+    /* Positionnement */
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    z-index: 50;
+
+    /* Boîte */
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+
+    /* Divers */
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   7. RESPONSIVE @media
+   ========================================================================== */
+
+/* ---- Laptops / petits écrans de bureau ---- */
+@media (max-width: 1200px) {
+    .project-section__title {
+        max-width: 55%;
+    }
+
+    .project-info {
+        max-width: 35%;
+    }
+
+    .project-section__icon-bulb {
+        display: none;
+    }
+}
+
+/* ---- Tablettes ---- */
+@media (max-width: 900px) {
+    .project-section__title {
+        max-width: 70%;
+    }
+
+    .project-info {
+        max-width: 50%;
+    }
+
+    .project-card {
+        transform: rotateX(20deg) rotateY(20deg);
+    }
+}
+
+/* ---- Petites tablettes / grands téléphones ---- */
+@media (max-width: 700px) {
+    .project-section {
+        gap: clamp(80px, 12vw, 120px);
+    }
+
+    .project-section__title {
+        max-width: 85%;
+    }
+
+    .project-info {
+        max-width: 70%;
+    }
+
+    .project-card {
+        transform: rotateX(15deg) rotateY(15deg);
+    }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 480px) {
+    .project-section__title {
+        max-width: 95%;
+    }
+
+    .project-info {
+        max-width: 90%;
+    }
+
+    .project-card {
+        transform: rotateX(10deg) rotateY(10deg);
+    }
+}
